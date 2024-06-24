@@ -1,0 +1,91 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level2.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "#pink map": {
+            "scaleInDock": 0.5
+        },
+        "C:/Sime/FAKS/4. semestar/OOP/projekt/The Krion Conquest/maps/sime_mapaOOP/level1.tmx": {
+            "scale": 0.20385416666666664,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 963.9243740419009,
+                "y": 321.3081246806337
+            }
+        },
+        "C:/Sime/FAKS/4. semestar/OOP/projekt/The Krion Conquest/maps/sime_mapaOOP/level1.tmx#Assests": {
+            "scaleInDock": 1
+        },
+        "C:/Sime/FAKS/4. semestar/OOP/projekt/The Krion Conquest/maps/sime_mapaOOP/level1.tmx#razine": {
+            "scaleInDock": 1
+        },
+        "C:/Sime/FAKS/4. semestar/OOP/projekt/The Krion Conquest/maps/sime_mapaOOP/level2.tmx": {
+            "scale": 0.20385416666666664,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 963.9243740419009,
+                "y": 321.3081246806337
+            }
+        },
+        "C:/Sime/FAKS/4. semestar/OOP/projekt/The Krion Conquest/maps/sime_mapaOOP/level2.tmx#Assests": {
+            "scaleInDock": 1
+        },
+        "C:/Sime/FAKS/4. semestar/OOP/projekt/The Krion Conquest/maps/sime_mapaOOP/level2.tmx#razine": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level1.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 958,
+                "y": 318
+            }
+        },
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level1.tmx#Assests": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level1.tmx#razine": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level2.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1162,
+                "y": 1170
+            }
+        },
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level2.tmx#Assests": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level2.tmx#razine": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Sime/FAKS/4. semestar/OOP/projekt/The Krion Conquest",
+    "last.imagePath": "C:/Sime/FAKS/4. semestar/OOP/projekt/The Krion Conquest/maps/pink map",
+    "map.lastUsedExportFilter": "JavaScript map files (*.js)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "openFiles": [
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level1.tmx",
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level2.tmx"
+    ],
+    "project": "sime projekt.tiled-project",
+    "recentFiles": [
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level1.tmx",
+        "C:/Users/Sime Jadrijev/Downloads/sime_mapaOOP/sime_mapaOOP/level2.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}
