@@ -22,7 +22,13 @@ function update_main() {
 
 const firstLevel = () => {
   handleInput();
+
+  let enemies = GAME.activeWorldMap.sprites;
+  enemies.forEach((sprite) => {
+    collisionWithEnemy(sprite);
+  });
 };
+
 const collisionWithEnemy = (sprite) => {
   if (sprite instanceof Robot && Postavke.francesca.touching(sprite)) {
     console.log("Diraš robota");
