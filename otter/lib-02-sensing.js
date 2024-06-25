@@ -1,5 +1,4 @@
 class Sensing {
-
   constructor() {
     this.left = new ButtonInput();
     this.right = new ButtonInput();
@@ -20,28 +19,25 @@ class Sensing {
     /** omjer nove mape */
     this.ratioW = 1;
     this.ratioH = 1;
-
   }
 
   /**
    * Event handler
-   * @param {MouseEvent} event 
+   * @param {MouseEvent} event
    */
   mouseDown_eventHandler = (event) => {
-
     this.mouse.x = event.offsetX;
     this.mouse.y = event.offsetY;
     this.mouse.down = true;
 
     this.mouse.resizeX = Math.round(this.mouse.x / this.ratioW);
     this.mouse.resizeY = Math.round(this.mouse.y / this.ratioH);
-
-  }
+  };
 
   /**
-  * Event handler
-  * @param {MouseEvent} event 
-  */
+   * Event handler
+   * @param {MouseEvent} event
+   */
   mouseUp_eventHandler = (event) => {
     this.mouse.x = event.offsetX;
     this.mouse.y = event.offsetY;
@@ -49,20 +45,17 @@ class Sensing {
 
     this.mouse.resizeX = Math.round(this.mouse.x / this.ratioW);
     this.mouse.resizeY = Math.round(this.mouse.y / this.ratioH);
-
-  }
+  };
 
   //? arrow
   keyDownUp_eventHandler = (event) => {
     this.keyDownUp_arrows(event.type, event.keyCode);
-  }
+  };
 
   keyDownUp_arrows = function (type, key_code) {
-
-    var down = (type == "keydown") ? true : false;
+    var down = type == "keydown" ? true : false;
 
     switch (key_code) {
-
       case 37:
         this.left.getInput(down);
         break;
@@ -96,9 +89,7 @@ class Sensing {
       default:
         console.log(key_code);
         break;
-
     }
-
   };
 
   /**
@@ -113,8 +104,7 @@ class Sensing {
       }
     }
   }
-
-};
+}
 
 class ButtonInput {
   constructor() {
@@ -122,12 +112,10 @@ class ButtonInput {
   }
 
   getInput(down) {
-
     if (this.down != down) this.active = down;
     this.down = down;
-
   }
-};
+}
 
 class MouseInput {
   constructor() {

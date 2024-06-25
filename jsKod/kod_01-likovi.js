@@ -93,3 +93,22 @@ class Francesca extends Character {
     }
   }
 }
+
+class Robot extends Character {
+  constructor(x, y, layer) {
+    super(x, y, layer);
+    this.frame_sets = {
+      up: [91],
+      "walk-up": [91],
+      right: [91],
+      "walk-right": [92, 93, 94],
+      down: [91],
+      "walk-down": [91],
+      left: [98],
+      "walk-left": [97, 96, 95],
+    };
+
+    this.dead = false;
+    this.direction = 270;
+  }
+}

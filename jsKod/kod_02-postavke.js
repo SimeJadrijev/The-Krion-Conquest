@@ -39,5 +39,18 @@ const setupLevelOne = () => {
   let francesca = new Francesca(GAME.getSpriteLayer("Witch"));
   GAME.addSprite(francesca);
   Postavke.francesca = francesca;
-  Postavke.francesca.x = 78;
+  Postavke.francesca.x = 72;
+
+  createRobot(260, 20);
+  createRobot(750, 30);
+  createRobot(1450, 30);
+};
+
+/* FUNCTIONS */
+
+const createRobot = (x, y) => {
+  let robot = new Robot(x, y, GAME.getSpriteLayer("Robot"));
+  GAME.addSprite(robot);
+  robot.visible = true;
+  Postavke.robot = robot;
 };
