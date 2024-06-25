@@ -92,6 +92,27 @@ class Francesca extends Character {
         break;
     }
   }
+
+  shoot() {
+    if (this.activeMissiles < 3) {
+      let m = new Missile(GAME.getSpriteLayer("projectil1"));
+
+      GAME.addSprite(m);
+
+      m.rbr = Postavke.missiles.length;
+      Postavke.missiles.push(m);
+
+      m.x = this.x;
+      m.y = this.y;
+      m.direction = this.direction;
+
+      m.distance = 0;
+      m.visible = true;
+      m.move = true;
+
+      this.activeMissiles++;
+    }
+  }
 }
 
 class Robot extends Character {
@@ -110,5 +131,73 @@ class Robot extends Character {
 
     this.dead = false;
     this.direction = 270;
+  }
+}
+
+class Missile extends Item {
+  #distance;
+  constructor(layer) {
+    super(layer);
+    this.visible = false;
+    this.distance = 0;
+    this.move = true;
+    this.height = 40;
+    this._collidedPlatform = "";
+  }
+
+  get collidedPlatform() {
+    return this._collidedPlatform;
+  }
+  set collidedPlatform(v) {
+    if (v != "") {
+      this.stop();
+    }
+
+    this._collidedPlatform = v;
+  }
+
+  get distance() {
+    return this.#distance;
+  }
+  set distance(v) {
+    if (v >= 250) {
+      this.#distance = 0;
+      this.stop();
+    } else {
+      this.#distance = v;
+    }
+  }
+
+  updatePosition() {
+    if (this.move) {
+      if (this.direction == 90) {
+        this.x += 10;
+        this.put += 10;
+      } else {
+        this.x -= 10;
+        this.put += 10;
+      }
+    }
+  }
+
+  stop() {
+    this.visible = false;
+    this.move = false;
+
+    let sprites = GAME.activeWorldMap.sprites;
+
+    for (let i = sprites.length - 1; i >= 0; i--) {
+      if (sprites[i] === this) {
+        sprites.splice(i, 1);
+
+        if (this.layer.name === "projectil1") {
+          Postavke.removeMissiles(this);
+          Postavke.francesca.activeMissiles--;
+        } else if (this.layer.name === "projectil2") {
+          Postavke.removeMissiles2(this);
+        }
+        break;
+      }
+    }
   }
 }

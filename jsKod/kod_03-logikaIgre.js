@@ -23,6 +23,12 @@ function update_main() {
 const firstLevel = () => {
   handleInput();
 };
+const collisionWithEnemy = (sprite) => {
+  if (sprite instanceof Robot && Postavke.francesca.touching(sprite)) {
+    console.log("Diraš robota");
+    Postavke.francesca.lives--;
+  }
+};
 
 const handleInput = () => {
   let activeInput = null;
@@ -42,8 +48,15 @@ const handleInput = () => {
     case "up":
       Postavke.francesca.jump();
       break;
+    case "space":
+      if (!Postavke.francesca.shoots) {
+        Postavke.francesca.shoots = true;
+        Postavke.francesca.shoot();
+      }
+      break;
 
     default:
+      Postavke.francesca.shoots = false;
       break;
   }
 };
