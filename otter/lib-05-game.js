@@ -7,18 +7,14 @@
  * Klasa: Game
  */
 class Game {
-
   constructor() {
-
     // todo: world jer je Map rezervirana!
     /** @type {WorldMap} */
     this.activeWorldMap = null;
     this.worlds = {};
-
   }
 
   logSprites_ActiveMap() {
-
     if (this.activeWorldMap == null) throw "Mapa nije učitana";
 
     let s = this.activeWorldMap.sprites;
@@ -26,7 +22,6 @@ class Game {
       const sprite = s[i];
       console.log(sprite);
     }
-
   } ////logSprites
 
   logLayers_ActiveMap() {
@@ -42,24 +37,20 @@ class Game {
    * Poziva update aktivne mape/world-a.
    */
   update() {
-
     // ako ne postoji
     if (this.activeWorldMap == null) throw "Mapa nije učitana!";
 
     this.activeWorldMap.update();
-
-  };
+  }
 
   /**
    * Učitaj podatke o svim mapama
    * @param {JSON} tiledJsExport - JSON podaci iz exporta.
    */
   loadWorldMaps(tiledJsExport) {
-
     this.worlds = Tiled.loadWorldMaps(tiledJsExport);
     // let prva = Tiled.firstMapName;
     // this.activeWorldMap = this.worlds[prva];
-
   } //// loadWorldMaps
 
   /**
@@ -68,7 +59,7 @@ class Game {
    * @returns {boolean} vraća true ako već postoji, ili false ako je nema.
    */
   hasWorld(worldName) {
-    return (this.worlds[worldName] != undefined);
+    return this.worlds[worldName] != undefined;
   }
 
   /**
@@ -80,7 +71,9 @@ class Game {
 
     if (this.activeWorldMap != null) {
       if (this.activeWorldMap.sprites.length > 0) {
-        console.warn("Promijenjena je mapa, pazite na sprites koji ostaju u staroj mapi:");
+        console.warn(
+          "Promijenjena je mapa, pazite na sprites koji ostaju u staroj mapi:"
+        );
         console.log(this.activeWorldMap.sprites);
       }
     }
@@ -89,7 +82,7 @@ class Game {
 
   /**
    * Dodaje sprite s u popis svih koji se crtaju.
-   * @param {Sprite} s 
+   * @param {Sprite} s
    */
   addSprite(s) {
     this.activeWorldMap.sprites.push(s);
@@ -99,8 +92,7 @@ class Game {
    * Pobriši sve sprite-ove iz aktivne mape.
    */
   clearSprites() {
-    if (this.activeWorldMap != null)
-      this.activeWorldMap.sprites = [];
+    if (this.activeWorldMap != null) this.activeWorldMap.sprites = [];
   }
 
   /**
@@ -110,6 +102,14 @@ class Game {
    */
   getSpriteLayer(name) {
     return this.activeWorldMap.spriteLayers[name];
+
+    if (la.used) {
+      let laCopy = Object.assign({}, la);
+      return laCopy;
+    } else {
+      la.used = true;
+      return la;
+    }
   }
 
   /**
@@ -126,9 +126,7 @@ class Game {
 
     return null;
   }
-
 } //// Game
-
 
 //! -------------------------------------------------
 
@@ -140,7 +138,6 @@ class GameWorldObject {
    * @param  {number} height - visina.
    */
   constructor(x, y, width, height) {
-
     this.height = height;
     this.width = width;
     this.x = x;
@@ -148,22 +145,17 @@ class GameWorldObject {
 
     this.x_old = x;
     this.y_old = y;
-
   }
-
-};
+}
 
 class GameWorldObjectAnimator extends GameWorldObject {
   constructor(x, y, w, h) {
-
     super(x, y, w, h);
-
-
   }
 
   init(frame_set, delay) {
     this.count = 0;
-    this.delay = (delay >= 1) ? delay : 1;
+    this.delay = delay >= 1 ? delay : 1;
     this.frame_set = frame_set;
     this.frame_index = 0;
     this.frame_value = frame_set[0];
@@ -171,14 +163,13 @@ class GameWorldObjectAnimator extends GameWorldObject {
   }
 
   animate() {
-
     switch (this.mode) {
-
-      case "loop": this.loop(); break;
-      case "pause": break;
-
+      case "loop":
+        this.loop();
+        break;
+      case "pause":
+        break;
     }
-
   }
 
   /**
@@ -189,8 +180,9 @@ class GameWorldObjectAnimator extends GameWorldObject {
    * @param {number} frame_index indeks početnog. Zadana vrijednost je 0.
    */
   changeFrameSet(frame_set, mode, delay = 10, frame_index = 0) {
-
-    if (this.frame_set === frame_set) { return; }
+    if (this.frame_set === frame_set) {
+      return;
+    }
 
     this.count = 0;
     this.delay = delay;
@@ -198,29 +190,24 @@ class GameWorldObjectAnimator extends GameWorldObject {
     this.frame_index = frame_index;
     this.frame_value = frame_set[frame_index];
     this.mode = mode;
-
   }
 
   /**
    * Vrti animacije.
    */
   loop() {
-
     this.count++;
 
     while (this.count > this.delay) {
-
       this.count -= this.delay;
 
-      this.frame_index = (this.frame_index < this.frame_set.length - 1) ? this.frame_index + 1 : 0;
+      this.frame_index =
+        this.frame_index < this.frame_set.length - 1 ? this.frame_index + 1 : 0;
 
       this.frame_value = this.frame_set[this.frame_index];
-
     }
-
   }
-
-};
+}
 
 /**
  * Klasa: Sprite
@@ -253,7 +240,6 @@ class Sprite extends GameWorldObjectAnimator {
 
     /** @type {Boolean} koristi se za zaustavljanje gravitacije kad dotakne platformu tipa Box */
     this.stopFall = false;
-
   }
 
   set visible(v) {
@@ -284,7 +270,8 @@ class Sprite extends GameWorldObjectAnimator {
    */
   frameSets(key) {
     let v = this.frame_sets[key];
-    if (v == undefined) throw `Ne postoji frameset [${key}] za ${this.layer.name}. Dodajte u GameSettings!`;
+    if (v == undefined)
+      throw `Ne postoji frameset [${key}] za ${this.layer.name}. Dodajte u GameSettings!`;
 
     return v;
   }
@@ -293,29 +280,29 @@ class Sprite extends GameWorldObjectAnimator {
    * Osvježava animacije ovisno o smjeru i brzini lika.
    */
   updateAnimation() {
-
     if (this.direction == 0) {
-      if (this.velocity_y < -0.1) this.changeFrameSet(this.frameSets("walk-up"), "loop", 5);
+      if (this.velocity_y < -0.1)
+        this.changeFrameSet(this.frameSets("walk-up"), "loop", 5);
       else this.changeFrameSet(this.frameSets("up"), "pause");
     }
     // ako je lik okrenut desno
     else if (this.direction == 90) {
       // ako ima brzinu po x, onda rotiraj animacije koje postoje za walk-right
-      if (this.velocity_x > 0.1) this.changeFrameSet(this.frameSets("walk-right"), "loop", 5);
+      if (this.velocity_x > 0.1)
+        this.changeFrameSet(this.frameSets("walk-right"), "loop", 5);
       // ako stoji, onda prikaži zadani položaj za desno
       else this.changeFrameSet(this.frameSets("right"), "pause");
-    }
-    else if (this.direction == 180) {
-      if (this.velocity_y > 0.1) this.changeFrameSet(this.frameSets("walk-down"), "loop", 5);
+    } else if (this.direction == 180) {
+      if (this.velocity_y > 0.1)
+        this.changeFrameSet(this.frameSets("walk-down"), "loop", 5);
       else this.changeFrameSet(this.frameSets("down"), "pause");
-    }
-    else if (this.direction == 270) {
-      if (this.velocity_x < -0.1) this.changeFrameSet(this.frameSets("walk-left"), "loop", 5);
+    } else if (this.direction == 270) {
+      if (this.velocity_x < -0.1)
+        this.changeFrameSet(this.frameSets("walk-left"), "loop", 5);
       else this.changeFrameSet(this.frameSets("left"), "pause");
     }
 
     this.animate();
-
   } //// updateAnimation
 
   /**
@@ -367,12 +354,9 @@ class Sprite extends GameWorldObjectAnimator {
    * @param  {number} h broj točkica koliko skače, zadano je 50.
    */
   jump(h = 50) {
-
     if (!this.jumping) {
-
       this.jumping = true;
       this.velocity_y -= h;
-
     }
   }
 
@@ -404,17 +388,18 @@ class Sprite extends GameWorldObjectAnimator {
       left: this.x,
       right: this.x + this.width,
       top: this.y,
-      bottom: this.y + this.height
+      bottom: this.y + this.height,
     };
 
     let b = {
       left: sprite.x,
       right: sprite.x + sprite.width,
       top: sprite.y,
-      bottom: sprite.y + sprite.height
+      bottom: sprite.y + sprite.height,
     };
 
-    let result = a.left <= b.right &&
+    let result =
+      a.left <= b.right &&
       b.left <= a.right &&
       a.top <= b.bottom &&
       b.top <= a.bottom;
@@ -437,7 +422,8 @@ class Sprite extends GameWorldObjectAnimator {
     let y1 = this.y;
     let y2 = this.y + this.height;
 
-    let clicked = (m.resizeX >= x1 && m.resizeX <= x2) && (m.resizeY >= y1 && m.resizeY <= y2);
+    let clicked =
+      m.resizeX >= x1 && m.resizeX <= x2 && m.resizeY >= y1 && m.resizeY <= y2;
     return clicked;
   }
 
@@ -445,17 +431,16 @@ class Sprite extends GameWorldObjectAnimator {
    * Kolizija ako se ne radi o platformi.
    * - vraća null ako ne dira
    * - vraća string: "top", "bottom", "left", "right" ako dira s te strane
-   * @param {Box} box 
+   * @param {Box} box
    */
   collideBox(box) {
-
     //if (box.constructor.name != "Box") throw new Error("Metoda mora primiti parametar tipa Box");
 
     let dira = this.touching(box);
     if (!dira) {
       if (this.stopFall)
-        //ako je izašao van granica kutije
         if (this.right < box.left || this.left > box.right) {
+          //ako je izašao van granica kutije
           this.stopFall = false;
           this.jumping = false;
         }
@@ -468,14 +453,12 @@ class Sprite extends GameWorldObjectAnimator {
       this.right = box.left - 1;
       this.velocity_x = 0;
       return "left";
-    }
-    else if (this.oldLeft >= box.right) {
+    } else if (this.oldLeft >= box.right) {
       //desno
       this.left = box.right + 1;
       this.velocity_x = 0;
       return "right";
-    }
-    else if (this.oldBottom <= box.top) {
+    } else if (this.oldBottom <= box.top) {
       this.bottom = box.top - 5;
       this.jumping = false;
       this.velocity_y = 0;
@@ -487,7 +470,6 @@ class Sprite extends GameWorldObjectAnimator {
     }
 
     return "other";
-
   } //collideBox
 
   //#region Strane lika
@@ -519,20 +501,34 @@ class Sprite extends GameWorldObjectAnimator {
     this.y = y;
   }
 
-  get oldTop() { return this.y_old; }
-  set oldTop(y) { this.y_old = y; }
+  get oldTop() {
+    return this.y_old;
+  }
+  set oldTop(y) {
+    this.y_old = y;
+  }
 
-  get oldBottom() { return this.y_old + this.height; }
-  set oldBottom(y) { this.y_old = y - this.height; }
+  get oldBottom() {
+    return this.y_old + this.height;
+  }
+  set oldBottom(y) {
+    this.y_old = y - this.height;
+  }
 
-  get oldLeft() { return this.x_old; }
-  set oldLeft(x) { this.x_old = x; }
+  get oldLeft() {
+    return this.x_old;
+  }
+  set oldLeft(x) {
+    this.x_old = x;
+  }
 
-  get oldRight() { return this.x_old + this.width; }
-  set oldRight(x) { this.x_old = x - this.width; }
+  get oldRight() {
+    return this.x_old + this.width;
+  }
+  set oldRight(x) {
+    this.x_old = x - this.width;
+  }
   //#endregion
-
-
 } //// Sprite
 
 /**
@@ -543,22 +539,22 @@ class Sprite extends GameWorldObjectAnimator {
  */
 class Item extends Sprite {
   /**
-  * 
-  * @param {Layer} layer 
-  */
+   *
+   * @param {Layer} layer
+   */
   constructor(layer) {
     super(layer.x, layer.y, layer.width, layer.height);
     // this.frame_set = [1];
     this.frame_sets = {
-      "down": [1],
+      down: [1],
       "walk-down": [1],
-      "left": [1],
+      left: [1],
       "walk-left": [1],
-      "right": [1],
+      right: [1],
       "walk-right": [1],
-      "up": [1],
-      "walk-up": [1]
-    }
+      up: [1],
+      "walk-up": [1],
+    };
 
     this.layer = layer;
   } //// constructor
@@ -577,7 +573,7 @@ class Box extends Item {
     this.okvir = true;
   }
 
-  updatePosition() { }
+  updatePosition() {}
 }
 
 /**
@@ -585,8 +581,7 @@ class Box extends Item {
  * - koristi se za kolizije s platformama
  */
 class PlatformCollider {
-
-  constructor() { }
+  constructor() {}
 
   /**
    * Provjerava može li stati na tile.
@@ -596,16 +591,15 @@ class PlatformCollider {
    * @param {number} tile_y y koordinata tile-a kojeg provjeravamo
    * @param {number} tile_w širina tile-a
    * @param {number} tile_h visina tile-a
-   * @returns 
+   * @returns
    */
   collide(value, sprite, tile_x, tile_y, tile_w, tile_h) {
-
     sprite.collidedPlatform = "";
 
     if (value == 0) return;
 
     if (value == undefined) {
-      //dira dno      
+      //dira dno
       return;
     }
 
@@ -618,7 +612,6 @@ class PlatformCollider {
     if (this.collidePlatformLeft(sprite, tile_x)) return;
     if (this.collidePlatformRight(sprite, tile_x + tile_w)) return;
     if (this.collidePlatformBottom(sprite, tile_y + tile_h)) return;
-
   }
 
   /**
@@ -628,16 +621,13 @@ class PlatformCollider {
    * @returns {boolean}
    */
   collidePlatformBottom(sprite, tile_bottom) {
-
     if (sprite.top < tile_bottom && sprite.oldTop >= tile_bottom) {
-
       sprite.top = tile_bottom + 0.01;
       sprite.velocity_y = 0;
       sprite.collidedPlatform = "bottom";
       return true;
-
-    } return false;
-
+    }
+    return false;
   }
 
   /**
@@ -647,16 +637,13 @@ class PlatformCollider {
    * @returns {boolean}
    */
   collidePlatformLeft(sprite, tile_left) {
-
     if (sprite.right > tile_left && sprite.oldRight <= tile_left) {
-
       sprite.right = tile_left - 0.01;
       sprite.velocity_x = 0;
       sprite.collidedPlatform = "left";
       return true;
-
-    } return false;
-
+    }
+    return false;
   }
 
   /**
@@ -666,38 +653,29 @@ class PlatformCollider {
    * @returns {boolean}
    */
   collidePlatformRight(sprite, tile_right) {
-
     if (sprite.left < tile_right && sprite.oldLeft >= tile_right) {
-
       sprite.left = tile_right + 0.01;
       sprite.velocity_x = 0;
       sprite.collidedPlatform = "right";
       return true;
-
-    } return false;
-
+    }
+    return false;
   }
 
-
   /**
-  * Ne dozvoljava prolaz ako lik dolazi na vrh platforme.
-  * @param {Sprite} sprite Lik
-  * @param {number} tile_top y koorinata vrha platforme
-  * @returns {boolean}
-  */
+   * Ne dozvoljava prolaz ako lik dolazi na vrh platforme.
+   * @param {Sprite} sprite Lik
+   * @param {number} tile_top y koorinata vrha platforme
+   * @returns {boolean}
+   */
   collidePlatformTop(sprite, tile_top) {
-
     if (sprite.bottom > tile_top && sprite.oldBottom <= tile_top) {
-
       sprite.bottom = tile_top - 0.01;
       sprite.velocity_y = 0;
       sprite.jumping = false;
       sprite.collidedPlatform = "top";
       return true;
-
-    } return false;
-
+    }
+    return false;
   }
-
-};
-
+}

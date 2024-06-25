@@ -15,17 +15,7 @@
  * Promjena stanja likova - interakcije
  */
 function update_main() {
-
-  if (GAME.activeWorldMap.name == "v10")
-    vjezbe10();
+  // if (GAME.activeWorldMap.name == "Level one") vjezbe10();
 
   GAME.update();
-
-};
-
-function vjezbe10() {
-  if (SENSING.right.active) {
-    Postavke.racoon.moveRight();
-  }
-
 }

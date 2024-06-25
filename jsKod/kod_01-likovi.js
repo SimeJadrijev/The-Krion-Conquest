@@ -12,7 +12,7 @@
 
 class Character extends Sprite {
   constructor(x, y, layer) {
-    super(x + 4, y + 4, 64 - 8, 64 - 8);
+    super(x + 4, y + 4, 64 - 16, 64 - 16);
 
     this.frame_sets = {};
 

@@ -14,15 +14,14 @@ let btnSetupGame = document.getElementById("btnSetupGame");
 btnSetupGame.addEventListener("click", setup);
 
 function setup() {
-
   GAME.clearSprites();
 
-  let odabrana = GAME.activeWorldMap.name;
-  GameSettings.output(odabrana);
+  let chosen = GAME.activeWorldMap.name;
+  GameSettings.output(chosen);
 
-  switch (odabrana) {
-    case "v10":
-      setupVjezbe10();
+  switch (chosen) {
+    case "Level one":
+      setupLevelOne();
       break;
 
     default:
@@ -34,14 +33,11 @@ function setup() {
 }
 
 /* LEVELS */
-function setupVjezbe10() {
-  GAME.clearSprites();
 
-  GAME.activeWorldMap.setCollisions("platforme");
-
-  let r = new Racoon(0, 0, GAME.getSpriteLayer("racoon"));
-  GAME.addSprite(r);
-
-  Postavke.racoon = r;
-
-}
+const setupLevelOne = () => {
+  GAME.activeWorldMap.setCollisions("Platform");
+  let francesca = new Francesca(GAME.getSpriteLayer("Witch"));
+  GAME.addSprite(francesca);
+  Postavke.francesca = francesca;
+  Postavke.francesca.x = 78;
+};
