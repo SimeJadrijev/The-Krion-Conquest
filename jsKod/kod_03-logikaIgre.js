@@ -27,12 +27,38 @@ const firstLevel = () => {
   enemies.forEach((sprite) => {
     collisionWithEnemy(sprite);
   });
+
+  francescaShooting();
 };
 
 const collisionWithEnemy = (sprite) => {
   if (sprite instanceof Robot && Postavke.francesca.touching(sprite)) {
     console.log("Diraš robota");
     Postavke.francesca.lives--;
+  }
+};
+
+const francescaShooting = () => {
+  let enemies = [...Postavke.robots];
+
+  for (let i = 0; i < Postavke.missiles.length; i++) {
+    let missile = Postavke.missiles[i];
+
+    for (let j = 0; j < enemies.length; j++) {
+      let enemy = enemies[j];
+
+      if (missile.touching(enemy)) {
+        missile.stop();
+
+        if (enemy.layer.name === "Robot") {
+          enemy.lives--;
+
+          if (enemy.dead === true) {
+            console.log("enemy dead");
+          }
+        }
+      }
+    }
   }
 };
 

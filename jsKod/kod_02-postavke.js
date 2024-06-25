@@ -16,6 +16,10 @@ btnSetupGame.addEventListener("click", setup);
 function setup() {
   GAME.clearSprites();
 
+  Postavke.robots = [];
+  Postavke.missiles = [];
+  Postavke.enemies = [];
+
   let chosen = GAME.activeWorldMap.name;
   GameSettings.output(chosen);
 
@@ -53,4 +57,6 @@ const createRobot = (x, y) => {
   GAME.addSprite(robot);
   robot.visible = true;
   Postavke.robot = robot;
+  Postavke.robots.push(robot);
+  console.log("dodan robot");
 };
