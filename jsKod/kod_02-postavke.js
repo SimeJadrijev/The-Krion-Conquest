@@ -16,6 +16,10 @@ btnSetupGame.addEventListener("click", setup);
 function setup() {
   GAME.clearSprites();
 
+  Postavke.robots = [];
+  Postavke.missiles = [];
+  Postavke.enemies = [];
+
   let chosen = GAME.activeWorldMap.name;
   GameSettings.output(chosen);
 
@@ -51,10 +55,8 @@ const setupLevelOne = () => {
 const createRobot = (x, y) => {
   let robot = new Robot(x, y, GAME.getSpriteLayer("Robot"));
   GAME.addSprite(robot);
-  Postavke.robot = robot;
-<<<<<<< HEAD
   robot.visible = true;
+  Postavke.robot = robot;
   Postavke.robots.push(robot);
-=======
->>>>>>> parent of 8b4fda2 (enemies now disappear when shot)
+  console.log("dodan robot");
 };

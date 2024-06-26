@@ -27,6 +27,8 @@ const firstLevel = () => {
   enemies.forEach((sprite) => {
     collisionWithEnemy(sprite);
   });
+
+  francescaShooting();
 };
 
 const collisionWithEnemy = (sprite) => {
@@ -34,13 +36,8 @@ const collisionWithEnemy = (sprite) => {
     console.log("Diraš robota");
     Postavke.francesca.lives--;
   }
-
-  Postavke.robots.forEach((robot) => {
-    if (!robot.dead) robot.shoot();
-  });
 };
 
-<<<<<<< HEAD
 const francescaShooting = () => {
   let enemies = [...Postavke.robots];
 
@@ -52,22 +49,19 @@ const francescaShooting = () => {
 
       if (missile.touching(enemy)) {
         missile.stop();
-        enemy.lives--;
 
-        // if (this.enemy.layer.name === "Robot") {
-        //   this.enemy.lives--;
+        if (enemy.layer.name === "Robot") {
+          enemy.lives--;
 
-        //   if (enemy.dead === true) {
-        //     console.log("enemy dead");
-        //   }
-        // }
+          if (enemy.dead === true) {
+            console.log("enemy dead");
+          }
+        }
       }
     }
   }
 };
 
-=======
->>>>>>> parent of 8b4fda2 (enemies now disappear when shot)
 const handleInput = () => {
   let activeInput = null;
 

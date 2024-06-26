@@ -116,6 +116,7 @@ class Francesca extends Character {
 }
 
 class Robot extends Character {
+  #lives;
   constructor(x, y, layer) {
     super(x, y, layer);
     this.frame_sets = {
@@ -129,8 +130,21 @@ class Robot extends Character {
       "walk-left": [97, 96, 95],
     };
 
+    this.#lives = 1;
     this.dead = false;
     this.direction = 270;
+  }
+
+  get lives() {
+    return this.#lives;
+  }
+  set lives(v) {
+    if (v <= 0) {
+      this.visible = false;
+      this.dead = true;
+    } else {
+      this.#lives = v;
+    }
   }
 }
 
@@ -191,6 +205,7 @@ class Missile extends Item {
         sprites.splice(i, 1);
 
         if (this.layer.name === "projectil1") {
+          console.log(this);
           Postavke.removeMissiles(this);
           Postavke.francesca.activeMissiles--;
         } else if (this.layer.name === "projectil2") {
