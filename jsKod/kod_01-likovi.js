@@ -133,6 +133,7 @@ class Robot extends Character {
     this.#lives = 1;
     this.dead = false;
     this.direction = 270;
+    this.shoots = false;
   }
 
   get lives() {
@@ -144,6 +145,30 @@ class Robot extends Character {
       this.dead = true;
     } else {
       this.#lives = v;
+    }
+  }
+
+  shoot() {
+    if (!this.shoots && !this.dead) {
+      let missile = new Missile(GAME.getSpriteLayer("projectil2"));
+      GAME.addSprite(missile);
+
+      missile.rbr = Postavke.missiles2.length;
+      Postavke.missiles2.push(missile);
+
+      missile.x = this.x;
+      missile.y = this.y;
+      missile.direction = 270;
+
+      missile.distance = 0;
+      missile.visible = true;
+      missile.move = true;
+
+      this.shoots = true;
+
+      setTimeout(() => {
+        this.shoots = false;
+      }, 1000);
     }
   }
 }
@@ -205,7 +230,6 @@ class Missile extends Item {
         sprites.splice(i, 1);
 
         if (this.layer.name === "projectil1") {
-          console.log(this);
           Postavke.removeMissiles(this);
           Postavke.francesca.activeMissiles--;
         } else if (this.layer.name === "projectil2") {

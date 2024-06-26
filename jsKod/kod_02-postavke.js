@@ -55,8 +55,7 @@ const setupLevelOne = () => {
 const createRobot = (x, y) => {
   let robot = new Robot(x, y, GAME.getSpriteLayer("Robot"));
   GAME.addSprite(robot);
-  robot.visible = true;
   Postavke.robot = robot;
+  robot.visible = true;
   Postavke.robots.push(robot);
-  console.log("dodan robot");
 };

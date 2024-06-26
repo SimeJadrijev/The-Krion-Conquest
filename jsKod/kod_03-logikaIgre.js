@@ -36,6 +36,10 @@ const collisionWithEnemy = (sprite) => {
     console.log("Diraš robota");
     Postavke.francesca.lives--;
   }
+
+  Postavke.robots.forEach((robot) => {
+    if (!robot.dead) robot.shoot();
+  });
 };
 
 const francescaShooting = () => {
@@ -49,14 +53,15 @@ const francescaShooting = () => {
 
       if (missile.touching(enemy)) {
         missile.stop();
+        enemy.lives--;
 
-        if (enemy.layer.name === "Robot") {
-          enemy.lives--;
+        // if (this.enemy.layer.name === "Robot") {
+        //   this.enemy.lives--;
 
-          if (enemy.dead === true) {
-            console.log("enemy dead");
-          }
-        }
+        //   if (enemy.dead === true) {
+        //     console.log("enemy dead");
+        //   }
+        // }
       }
     }
   }
