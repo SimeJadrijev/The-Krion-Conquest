@@ -27,8 +27,6 @@ const firstLevel = () => {
   enemies.forEach((sprite) => {
     collisionWithEnemy(sprite);
   });
-
-  francescaShooting();
 };
 
 const collisionWithEnemy = (sprite) => {
@@ -42,6 +40,7 @@ const collisionWithEnemy = (sprite) => {
   });
 };
 
+<<<<<<< HEAD
 const francescaShooting = () => {
   let enemies = [...Postavke.robots];
 
@@ -67,6 +66,8 @@ const francescaShooting = () => {
   }
 };
 
+=======
+>>>>>>> parent of 8b4fda2 (enemies now disappear when shot)
 const handleInput = () => {
   let activeInput = null;
 

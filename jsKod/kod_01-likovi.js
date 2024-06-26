@@ -116,7 +116,6 @@ class Francesca extends Character {
 }
 
 class Robot extends Character {
-  #lives;
   constructor(x, y, layer) {
     super(x, y, layer);
     this.frame_sets = {
@@ -130,46 +129,8 @@ class Robot extends Character {
       "walk-left": [97, 96, 95],
     };
 
-    this.#lives = 1;
     this.dead = false;
     this.direction = 270;
-    this.shoots = false;
-  }
-
-  get lives() {
-    return this.#lives;
-  }
-  set lives(v) {
-    if (v <= 0) {
-      this.visible = false;
-      this.dead = true;
-    } else {
-      this.#lives = v;
-    }
-  }
-
-  shoot() {
-    if (!this.shoots && !this.dead) {
-      let missile = new Missile(GAME.getSpriteLayer("projectil2"));
-      GAME.addSprite(missile);
-
-      missile.rbr = Postavke.missiles2.length;
-      Postavke.missiles2.push(missile);
-
-      missile.x = this.x;
-      missile.y = this.y;
-      missile.direction = 270;
-
-      missile.distance = 0;
-      missile.visible = true;
-      missile.move = true;
-
-      this.shoots = true;
-
-      setTimeout(() => {
-        this.shoots = false;
-      }, 1000);
-    }
   }
 }
 
