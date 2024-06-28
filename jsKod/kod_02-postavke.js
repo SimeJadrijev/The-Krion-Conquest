@@ -54,8 +54,11 @@ const setupLevelOne = () => {
 const setupLevelTwo = () => {
   GAME.activeWorldMap.setCollisions("Platform");
   const francesca = createFrancesca();
-};
+  const finalBoss = createFinalBoss(1300, 150);
 
+  createRobot(320, 80);
+  createRobot(900, 250);
+};
 /* FUNCTIONS */
 
 const createRobot = (x, y) => {
@@ -81,6 +84,7 @@ const initializeDefaultArrays = () => {
   Postavke.missiles = [];
   Postavke.enemies = [];
   Postavke.coins = [];
+  Postavke.finalBosses = [];
 };
 
 const createFrancesca = () => {
@@ -89,4 +93,13 @@ const createFrancesca = () => {
   Postavke.francesca = francesca;
   Postavke.francesca.x = 72;
   return francesca;
+};
+
+const createFinalBoss = (x, y) => {
+  const finalBoss = new FinalBoss(x, y, GAME.getSpriteLayer("StoneEnemy"));
+  GAME.addSprite(finalBoss);
+  finalBoss.visible = true;
+  Postavke.finalBoss = finalBoss;
+  Postavke.finalBosses.push(finalBoss);
+  return finalBoss;
 };

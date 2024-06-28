@@ -12,6 +12,8 @@ class Postavke {
   static missiles = [];
   static missiles2 = [];
   static robots = [];
+  static francesca = null;
+  static finalBoss = null;
 
   static removeMissiles(p) {
     for (let i = Postavke.missiles.length - 1; i >= 0; i--) {
