@@ -96,23 +96,27 @@ class Francesca extends Character {
 
   shoot() {
     if (this.activeMissiles < 3) {
-      let m = new Missile(GAME.getSpriteLayer("projectil1"));
-
-      GAME.addSprite(m);
-
-      m.rbr = Postavke.missiles.length;
-      Postavke.missiles.push(m);
-
-      m.x = this.x;
-      m.y = this.y;
-      m.direction = this.direction;
-
-      m.distance = 0;
-      m.visible = true;
-      m.move = true;
-
+      const missile = this.shootNewMissile();
+      this.setMissileProperties(missile);
       this.activeMissiles++;
     }
+  }
+
+  shootNewMissile() {
+    const missile = new Missile(GAME.getSpriteLayer("projectil1"));
+    GAME.addSprite(missile);
+    Postavke.missiles.push(missile);
+    return missile;
+  }
+
+  setMissileProperties(missile) {
+    missile.x = this.x;
+    missile.y = this.y;
+    missile.direction = this.direction;
+
+    missile.distance = 0;
+    missile.visible = true;
+    missile.move = true;
   }
 }
 
@@ -142,9 +146,7 @@ class Robot extends Character {
   }
   set lives(v) {
     if (v <= 0) {
-      this._visible = false;
-      this.height = 0;
-      this.dead = true;
+      this.killRobot();
     } else {
       this.#lives = v;
     }
@@ -152,25 +154,42 @@ class Robot extends Character {
 
   shoot() {
     if (!this.shoots) {
-      let missile = new Missile(GAME.getSpriteLayer("projectil2"));
-      GAME.addSprite(missile);
-
-      missile.rbr = Postavke.missiles2.length;
-      Postavke.missiles2.push(missile);
-
-      missile.x = this.x;
-      missile.y = this.y;
-      missile.direction = this.direction;
-
-      missile.distance = 0;
-      missile.visible = true;
-      missile.move = true;
+      const missile = this.shootNewMissile();
+      this.setMissileProperties(missile);
 
       this.shoots = true;
-      setTimeout(() => {
-        this.shoots = false;
-      }, 1500);
+
+      this.setPeriodicShooting(1500);
     }
+  }
+
+  shootNewMissile() {
+    const missile = new Missile(GAME.getSpriteLayer("projectil2"));
+    GAME.addSprite(missile);
+    Postavke.missiles2.push(missile);
+    return missile;
+  }
+
+  killRobot() {
+    this._visible = false;
+    this.height = 0;
+    this.dead = true;
+  }
+
+  setMissileProperties(missile) {
+    missile.x = this.x;
+    missile.y = this.y;
+    missile.direction = this.direction;
+
+    missile.distance = 0;
+    missile.visible = true;
+    missile.move = true;
+  }
+
+  setPeriodicShooting(time) {
+    setTimeout(() => {
+      this.shoots = false;
+    }, time);
   }
 }
 
@@ -250,6 +269,10 @@ class Collectable extends Item {
 class Coin extends Collectable {
   constructor(layer) {
     super(layer);
+    this.setDeafultCoinValues();
+  }
+
+  setDeafultCoinValues() {
     this.points = 10;
     this.visible = true;
     this.collected = false;
