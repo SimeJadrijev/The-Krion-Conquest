@@ -37,7 +37,7 @@ const firstLevel = () => {
 
   collisionWithMissile();
   collectCoins(Postavke.coins);
-  updateGameOutput();
+  updateGameOutput(1);
 };
 
 const secondLevel = () => {
@@ -59,6 +59,7 @@ const secondLevel = () => {
   robotsMovement(1, 850, 950);
 
   // dieFromSpikesPlatform(Postavke.spikes);
+  updateGameOutput(2);
 };
 
 const createCoin = (enemy) => {
@@ -100,7 +101,7 @@ const francescaShooting = (level) => {
         Postavke.francesca.kills++;
 
         if (Postavke.francesca.kills === 6)
-          alert("Česitke! Uspješno ste porazili final bossa!");
+          alert("Čestitke! Uspješno ste porazili final bossa!");
       }
     }
 
@@ -175,15 +176,27 @@ const handleInput = () => {
   }
 };
 
-const updateGameOutput = () => {
-  let instructions = `Upute: da biste prešli razinu, morate upucati sve robote bez da budete pogođeni, a skupljanjem novčića dobijate dodatan život.`;
-  GameSettings.output(
-    `
+const updateGameOutput = (level) => {
+  if (level === 1) {
+    const instructions = `Upute: da biste prešli razinu, morate upucati sve robote bez da budete pogođeni, a skupljanjem novčića dobijate dodatan život.`;
+    GameSettings.output(
+      `
     ${instructions} \n
     Životi: ${Postavke.francesca.lives}
     `,
-    true
-  );
+      true
+    );
+  } else if (level === 2) {
+    const instructions = `Upute: da biste prešli igricu, morate upucati sve robote bez da budete pogođeni, i na kraju četiri puta pogoditi final bossa. Nema novčića za dodatne živote.`;
+    GameSettings.output(
+      `
+    ${instructions} \n
+    Tvoji životi: ${Postavke.francesca.lives}
+    Final boss životi: ${Postavke.finalBoss.lives}
+    `,
+      true
+    );
+  }
 };
 
 const robotsMovement = (i, leftBorder, rightBorder) => {
