@@ -29,7 +29,7 @@ const firstLevel = () => {
     collisionWithEnemy(sprite);
   });
 
-  francescaShooting();
+  francescaShooting(1);
 
   Postavke.robots.forEach((robot) => {
     if (!robot.dead) robot.shoot();
@@ -47,7 +47,7 @@ const secondLevel = () => {
     collisionWithEnemy(sprite);
   });
 
-  francescaShooting();
+  francescaShooting(2);
   Postavke.robots.forEach((robot) => {
     if (!robot.dead) robot.shoot();
   });
@@ -90,6 +90,17 @@ const francescaShooting = (level) => {
 
   for (let i = 0; i < Postavke.missiles.length; i++) {
     let missile = Postavke.missiles[i];
+
+    if (level === 2) {
+      if (missile.touching(Postavke.finalBoss)) {
+        missile.stop();
+        Postavke.finalBoss.lives--;
+        Postavke.francesca.kills++;
+
+        if (Postavke.francesca.kills === 6)
+          alert("Česitke! Uspješno ste porazili final bossa!");
+      }
+    }
 
     for (let j = 0; j < enemies.length; j++) {
       let enemy = enemies[j];

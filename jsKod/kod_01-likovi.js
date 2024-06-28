@@ -208,7 +208,7 @@ class FinalBoss extends Character {
       left: [35],
       "walk-left": [37, 36, 35],
     };
-    this.#lives = 5;
+    this.#lives = 4;
     this.dead = false;
   }
 
@@ -228,8 +228,7 @@ class FinalBoss extends Character {
 
   set lives(v) {
     if (v <= 0) {
-      this.visible = false;
-      this.dead = true;
+      this.killFinalBoss();
     } else {
       this.#lives = v;
     }
@@ -253,7 +252,7 @@ class FinalBoss extends Character {
     return missile;
   }
 
-  killRobot() {
+  killFinalBoss() {
     this._visible = false;
     this.height = 0;
     this.dead = true;
