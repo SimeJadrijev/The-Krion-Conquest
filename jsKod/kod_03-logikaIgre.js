@@ -57,6 +57,8 @@ const secondLevel = () => {
 
   robotsMovement(0, 270, 350);
   robotsMovement(1, 850, 950);
+
+  // dieFromSpikesPlatform(Postavke.spikes);
 };
 
 const createCoin = (enemy) => {
@@ -196,3 +198,13 @@ const robotsMovement = (i, leftBorder, rightBorder) => {
     if (robot.x >= rightBorder) robot.direction = 270;
   }
 };
+
+// const dieFromSpikesPlatform = (spikesPlatforms) => {
+//   for (let i = 0; i < spikesPlatforms.length; i++) {
+//     const spikePlatform = spikesPlatforms[i];
+
+//     if (Postavke.francesca.touching(spikePlatform)) {
+//       Postavke.francesca.lives--;
+//     }
+//   }
+// };

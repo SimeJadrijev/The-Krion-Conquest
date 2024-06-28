@@ -58,6 +58,8 @@ const setupLevelTwo = () => {
 
   createRobot(320, 80);
   createRobot(900, 250);
+
+  // createSpikesPlatform("spike", 2);
 };
 /* FUNCTIONS */
 
@@ -85,6 +87,7 @@ const initializeDefaultArrays = () => {
   Postavke.enemies = [];
   Postavke.coins = [];
   Postavke.finalBosses = [];
+  Postavke.spikes = [];
 };
 
 const createFrancesca = () => {
@@ -103,3 +106,13 @@ const createFinalBoss = (x, y) => {
   Postavke.finalBosses.push(finalBoss);
   return finalBoss;
 };
+
+// const createSpikesPlatform = (layer, amount) => {
+//   for (let i = 1; i <= amount; i++) {
+//     const layerName = layer + i;
+//     const spikesPlatform = new Spike(GAME.getSpriteLayer(layerName));
+//     spikesPlatform.visible = true;
+//     GAME.addSprite(spikesPlatform);
+//     Postavke.spikes.push(spikesPlatform);
+//   }
+// };

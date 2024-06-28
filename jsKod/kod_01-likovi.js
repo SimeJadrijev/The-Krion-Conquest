@@ -360,3 +360,22 @@ class Coin extends Collectable {
     this.collected = false;
   }
 }
+
+// class Spike extends Collectable {
+//   constructor(layer) {
+//     super(layer);
+//     this.damage = 1;
+//     this.shown = true;
+//     this.toggleVisibility();
+//   }
+
+//   toggleVisibility() {
+//     setInterval(() => {
+//       this.shown = !this.shown;
+//     }, 1000);
+//   }
+
+//   update() {
+//     this.visible = this.shown;
+//   }
+// }
