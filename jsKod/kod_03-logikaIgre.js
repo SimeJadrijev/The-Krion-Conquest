@@ -36,6 +36,7 @@ const firstLevel = () => {
 
   collisionWithMissile();
   collectCoins(Postavke.coins);
+  updateGameOutput();
 };
 
 const createCoin = (enemy) => {
@@ -82,7 +83,9 @@ const francescaShooting = () => {
           Postavke.francesca.kills++;
 
           if (Postavke.francesca.kills === 3) {
-            alert("gotovo");
+            alert(
+              "Bravo! Uspješno ste prešli razinu! Pripremite novu na setup!"
+            );
           }
         }
       }
@@ -136,4 +139,15 @@ const handleInput = () => {
       Postavke.francesca.shoots = false;
       break;
   }
+};
+
+const updateGameOutput = () => {
+  let instructions = `Upute: da biste prešli razinu, morate upucati sve robote bez da budete pogođeni, a skupljanjem novčića dobijate dodatan život.`;
+  GameSettings.output(
+    `
+    ${instructions} \n
+    Životi: ${Postavke.francesca.lives}
+    `,
+    true
+  );
 };

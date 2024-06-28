@@ -60,6 +60,7 @@ class Francesca extends Character {
   set lives(v) {
     if (v <= 0) {
       btnStop_click();
+      alert("Umrli ste! Više sreće drugi put!");
     } else {
       this.#lives = v;
     }
