@@ -12,6 +12,7 @@ class Postavke {
   static missiles = [];
   static missiles2 = [];
   static robots = [];
+  static spikes = [];
   static francesca = null;
   static finalBoss = null;
 
