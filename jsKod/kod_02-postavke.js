@@ -45,7 +45,7 @@ const setupLevelOne = () => {
   Postavke.francesca = francesca;
   Postavke.francesca.x = 72;
 
-  createRobot(260, 20);
+  createRobot(450, 20);
   createRobot(750, 30);
   createRobot(1450, 30);
 };
@@ -58,5 +58,4 @@ const createRobot = (x, y) => {
   robot.visible = true;
   Postavke.robot = robot;
   Postavke.robots.push(robot);
-  console.log("dodan robot");
 };

@@ -120,19 +120,20 @@ class Robot extends Character {
   constructor(x, y, layer) {
     super(x, y, layer);
     this.frame_sets = {
-      up: [91],
-      "walk-up": [91],
-      right: [91],
-      "walk-right": [92, 93, 94],
-      down: [91],
-      "walk-down": [91],
-      left: [98],
-      "walk-left": [97, 96, 95],
+      up: [61],
+      "walk-up": [61],
+      right: [61],
+      "walk-right": [61, 62, 63],
+      down: [61],
+      "walk-down": [61],
+      left: [64],
+      "walk-left": [66, 65, 64],
     };
 
     this.#lives = 1;
     this.dead = false;
     this.direction = 270;
+    this.shoots = false;
   }
 
   get lives() {
@@ -145,6 +146,29 @@ class Robot extends Character {
       this.dead = true;
     } else {
       this.#lives = v;
+    }
+  }
+
+  shoot() {
+    if (!this.shoots) {
+      let missile = new Missile(GAME.getSpriteLayer("projectil2"));
+      GAME.addSprite(missile);
+
+      missile.rbr = Postavke.missiles2.length;
+      Postavke.missiles2.push(missile);
+
+      missile.x = this.x;
+      missile.y = this.y;
+      missile.direction = this.direction;
+
+      missile.distance = 0;
+      missile.visible = true;
+      missile.move = true;
+
+      this.shoots = true;
+      setTimeout(() => {
+        this.shoots = false;
+      }, 1000);
     }
   }
 }
@@ -164,9 +188,7 @@ class Missile extends Item {
     return this._collidedPlatform;
   }
   set collidedPlatform(v) {
-    if (v != "") {
-      this.stop();
-    }
+    if (v != "") this.stop();
 
     this._collidedPlatform = v;
   }
@@ -178,9 +200,7 @@ class Missile extends Item {
     if (v >= 250) {
       this.#distance = 0;
       this.stop();
-    } else {
-      this.#distance = v;
-    }
+    } else this.#distance = v;
   }
 
   updatePosition() {
@@ -206,7 +226,6 @@ class Missile extends Item {
         sprites.splice(i, 1);
 
         if (this.layer.name === "projectil1") {
-          console.log(this);
           Postavke.removeMissiles(this);
           Postavke.francesca.activeMissiles--;
         } else if (this.layer.name === "projectil2") {

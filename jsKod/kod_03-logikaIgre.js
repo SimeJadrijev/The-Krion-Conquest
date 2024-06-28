@@ -29,6 +29,10 @@ const firstLevel = () => {
   });
 
   francescaShooting();
+
+  Postavke.robots.forEach((robot) => {
+    if (!robot.dead) robot.shoot();
+  });
 };
 
 const collisionWithEnemy = (sprite) => {
