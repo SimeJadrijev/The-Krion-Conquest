@@ -194,6 +194,48 @@ class Robot extends Character {
   }
 }
 
+class FinalBoss extends Character {
+  #lives;
+  constructor(x, y, layer) {
+    super(x, y, layer);
+    this.frame_sets = {
+      up: [31],
+      "walk-up": [31],
+      right: [31],
+      "walk-right": [31, 32, 33],
+      down: [31],
+      "walk-down": [31],
+      left: [35],
+      "walk-left": [37, 36, 35],
+    };
+    this.#lives = 5;
+    this.dead = false;
+  }
+
+  moveRight() {
+    this.direction = 90;
+    this.velocity_x += 1.7;
+  }
+
+  moveLeft() {
+    this.direction = 270;
+    this.velocity_x -= 1.7;
+  }
+
+  get lives() {
+    return this.#lives;
+  }
+
+  set lives(v) {
+    if (v <= 0) {
+      this.visible = false;
+      this.dead = true;
+    } else {
+      this.#lives = v;
+    }
+  }
+}
+
 class Missile extends Item {
   #distance;
   constructor(layer) {

@@ -42,6 +42,12 @@ const firstLevel = () => {
 
 const secondLevel = () => {
   handleInput();
+  const enemies = GAME.activeWorldMap.sprites;
+  enemies.forEach((sprite) => {
+    collisionWithEnemy(sprite);
+  });
+
+  francescaShooting();
 };
 
 const createCoin = (enemy) => {
