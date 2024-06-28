@@ -48,6 +48,13 @@ const secondLevel = () => {
   });
 
   francescaShooting();
+  Postavke.robots.forEach((robot) => {
+    if (!robot.dead) robot.shoot();
+  });
+  collisionWithMissile();
+
+  robotsMovement(0, 270, 350);
+  robotsMovement(1, 850, 950);
 };
 
 const createCoin = (enemy) => {
@@ -76,7 +83,7 @@ const collisionWithEnemy = (sprite) => {
     Postavke.francesca.lives--;
 };
 
-const francescaShooting = () => {
+const francescaShooting = (level) => {
   const enemies = [...Postavke.robots];
 
   for (let i = 0; i < Postavke.missiles.length; i++) {
@@ -90,8 +97,9 @@ const francescaShooting = () => {
         enemy.lives--;
 
         if (enemy.dead === true) {
-          createCoinAfterDeath(j, enemy);
           Postavke.francesca.kills++;
+
+          if (level === 1) createCoinAfterDeath(j, enemy);
 
           if (Postavke.francesca.kills === 3) {
             alert(
@@ -161,4 +169,17 @@ const updateGameOutput = () => {
     `,
     true
   );
+};
+
+const robotsMovement = (i, leftBorder, rightBorder) => {
+  const robot = Postavke.robots[i];
+  if (robot.direction === 270) {
+    robot.moveLeft();
+
+    if (robot.x <= leftBorder) robot.direction = 90;
+  } else if (robot.direction === 90) {
+    robot.moveRight();
+
+    if (robot.x >= rightBorder) robot.direction = 270;
+  }
 };
