@@ -16,6 +16,7 @@
  */
 function update_main() {
   if (GAME.activeWorldMap.name == "Level one") firstLevel();
+  else if (GAME.activeWorldMap.name == "Level two") secondLevel();
 
   GAME.update();
 }
@@ -23,7 +24,7 @@ function update_main() {
 const firstLevel = () => {
   handleInput();
 
-  let enemies = GAME.activeWorldMap.sprites;
+  const enemies = GAME.activeWorldMap.sprites;
   enemies.forEach((sprite) => {
     collisionWithEnemy(sprite);
   });
@@ -37,6 +38,10 @@ const firstLevel = () => {
   collisionWithMissile();
   collectCoins(Postavke.coins);
   updateGameOutput();
+};
+
+const secondLevel = () => {
+  handleInput();
 };
 
 const createCoin = (enemy) => {

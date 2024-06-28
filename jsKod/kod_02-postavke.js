@@ -25,6 +25,9 @@ function setup() {
     case "Level one":
       setupLevelOne();
       break;
+    case "Level two":
+      setupLevelTwo();
+      break;
 
     default:
       throw "Ne postoji setup za " + GAME.activeWorldMap.name;
@@ -46,6 +49,11 @@ const setupLevelOne = () => {
   createRobot(1450, 30);
 
   createCoins(3);
+};
+
+const setupLevelTwo = () => {
+  GAME.activeWorldMap.setCollisions("Platform");
+  const francesca = createFrancesca();
 };
 
 /* FUNCTIONS */
