@@ -35,6 +35,16 @@ const firstLevel = () => {
   });
 
   collisionWithMissile();
+  collectCoins(Postavke.coins);
+};
+
+const createCoin = (enemy) => {
+  const coin = new Coin(GAME.getSpriteLayer("c1"));
+
+  placeCoinOnDeadEnemyPosition(enemy, coin);
+
+  GAME.addSprite(coin);
+  Postavke.coins.push(coin);
 };
 
 const collisionWithMissile = () => {
@@ -57,7 +67,7 @@ const collisionWithEnemy = (sprite) => {
 };
 
 const francescaShooting = () => {
-  let enemies = [...Postavke.robots];
+  const enemies = [...Postavke.robots];
 
   for (let i = 0; i < Postavke.missiles.length; i++) {
     let missile = Postavke.missiles[i];
@@ -67,15 +77,25 @@ const francescaShooting = () => {
 
       if (missile.touching(enemy)) {
         missile.stop();
+        enemy.lives--;
 
-        if (enemy.layer.name === "Robot") {
-          enemy.lives--;
-
-          if (enemy.dead === true) {
-            console.log("enemy dead");
-          }
+        if (enemy.dead === true) {
+          Postavke.coins[j].visible = true;
+          Postavke.coins[j].x = enemy.x;
+          Postavke.coins[j].y = enemy.y - 50;
         }
       }
+    }
+  }
+};
+
+const collectCoins = (coins) => {
+  for (let i = 0; i < coins.length; i++) {
+    const thisCoin = coins[i];
+    if (Postavke.francesca.touching(coins[i])) {
+      thisCoin.collected = true;
+      thisCoin.visible = false;
+      Postavke.francesca.lives++;
     }
   }
 };

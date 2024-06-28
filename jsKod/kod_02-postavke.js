@@ -19,6 +19,7 @@ function setup() {
   Postavke.robots = [];
   Postavke.missiles = [];
   Postavke.enemies = [];
+  Postavke.coins = [];
 
   let chosen = GAME.activeWorldMap.name;
   GameSettings.output(chosen);
@@ -45,9 +46,11 @@ const setupLevelOne = () => {
   Postavke.francesca = francesca;
   Postavke.francesca.x = 72;
 
-  createRobot(450, 20);
+  createRobot(320, 20);
   createRobot(750, 30);
   createRobot(1450, 30);
+
+  createCoins(3);
 };
 
 /* FUNCTIONS */
@@ -58,4 +61,14 @@ const createRobot = (x, y) => {
   robot.visible = true;
   Postavke.robot = robot;
   Postavke.robots.push(robot);
+};
+
+const createCoins = (amount) => {
+  for (let i = 1; i <= 3; i++) {
+    const layerName = "c" + i;
+    const newCoin = new Coin(GAME.getSpriteLayer(layerName));
+    newCoin.visible = false;
+    GAME.addSprite(newCoin);
+    Postavke.coins.push(newCoin);
+  }
 };

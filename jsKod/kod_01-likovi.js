@@ -168,7 +168,7 @@ class Robot extends Character {
       this.shoots = true;
       setTimeout(() => {
         this.shoots = false;
-      }, 1000);
+      }, 1500);
     }
   }
 }
@@ -234,5 +234,23 @@ class Missile extends Item {
         break;
       }
     }
+  }
+}
+
+class Collectable extends Item {
+  constructor(x, y, layer) {
+    super(x, y, layer);
+
+    if (this.constructor == Collectable)
+      throw new Error("Collectable se ne može instancirati");
+  }
+}
+
+class Coin extends Collectable {
+  constructor(layer) {
+    super(layer);
+    this.points = 10;
+    this.visible = true;
+    this.collected = false;
   }
 }
