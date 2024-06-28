@@ -51,6 +51,8 @@ const secondLevel = () => {
   Postavke.robots.forEach((robot) => {
     if (!robot.dead) robot.shoot();
   });
+
+  if (!Postavke.finalBoss.dead) Postavke.finalBoss.shoot();
   collisionWithMissile();
 
   robotsMovement(0, 270, 350);

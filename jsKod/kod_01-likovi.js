@@ -234,6 +234,46 @@ class FinalBoss extends Character {
       this.#lives = v;
     }
   }
+
+  shoot() {
+    if (!this.shoots) {
+      const missile = this.shootNewMissile();
+      this.setMissileProperties(missile);
+
+      this.shoots = true;
+
+      this.setPeriodicShooting(1500);
+    }
+  }
+
+  shootNewMissile() {
+    const missile = new Missile(GAME.getSpriteLayer("projectil2"));
+    GAME.addSprite(missile);
+    Postavke.missiles2.push(missile);
+    return missile;
+  }
+
+  killRobot() {
+    this._visible = false;
+    this.height = 0;
+    this.dead = true;
+  }
+
+  setMissileProperties(missile) {
+    missile.x = this.x;
+    missile.y = this.y;
+    missile.direction = this.direction;
+
+    missile.distance = 0;
+    missile.visible = true;
+    missile.move = true;
+  }
+
+  setPeriodicShooting(time) {
+    setTimeout(() => {
+      this.shoots = false;
+    }, time);
+  }
 }
 
 class Missile extends Item {
