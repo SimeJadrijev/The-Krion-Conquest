@@ -33,6 +33,20 @@ const firstLevel = () => {
   Postavke.robots.forEach((robot) => {
     if (!robot.dead) robot.shoot();
   });
+
+  collisionWithMissile();
+};
+
+const collisionWithMissile = () => {
+  for (let i = 0; i < Postavke.missiles2.length; i++) {
+    let missile = Postavke.missiles2[i];
+
+    if (missile.touching(Postavke.francesca)) {
+      missile.stop();
+      Postavke.francesca.lives--;
+      break;
+    }
+  }
 };
 
 const collisionWithEnemy = (sprite) => {

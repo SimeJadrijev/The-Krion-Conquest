@@ -207,11 +207,11 @@ class Missile extends Item {
     if (this.move) {
       if (this.direction == 90) {
         this.x += 10;
-        this.put += 10;
       } else {
         this.x -= 10;
-        this.put += 10;
       }
+
+      this.distance += 10;
     }
   }
 
