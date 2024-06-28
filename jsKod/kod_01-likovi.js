@@ -33,14 +33,14 @@ class Francesca extends Character {
   constructor(layer) {
     super(0, 0, layer);
     this.frame_sets = {
-      up: [31],
-      "walk-up": [31],
-      right: [31],
-      "walk-right": [32, 33, 34],
-      down: [31],
-      "walk-down": [31],
-      left: [38],
-      "walk-left": [37, 36, 35],
+      up: [1],
+      "walk-up": [1],
+      right: [1],
+      "walk-right": [1, 2, 3],
+      down: [1],
+      "walk-down": [1],
+      left: [4],
+      "walk-left": [6, 5, 4],
     };
 
     this.shoots = false;
