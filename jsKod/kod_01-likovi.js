@@ -140,7 +140,8 @@ class Robot extends Character {
   }
   set lives(v) {
     if (v <= 0) {
-      this.visible = false;
+      this._visible = false;
+      this.height = 0;
       this.dead = true;
     } else {
       this.#lives = v;
