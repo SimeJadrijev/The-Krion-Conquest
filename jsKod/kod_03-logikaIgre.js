@@ -60,10 +60,8 @@ const collisionWithMissile = () => {
 };
 
 const collisionWithEnemy = (sprite) => {
-  if (sprite instanceof Robot && Postavke.francesca.touching(sprite)) {
-    console.log("Diraš robota");
+  if (sprite instanceof Robot && Postavke.francesca.touching(sprite))
     Postavke.francesca.lives--;
-  }
 };
 
 const francescaShooting = () => {
@@ -80,9 +78,7 @@ const francescaShooting = () => {
         enemy.lives--;
 
         if (enemy.dead === true) {
-          Postavke.coins[j].visible = true;
-          Postavke.coins[j].x = enemy.x;
-          Postavke.coins[j].y = enemy.y - 50;
+          createCoinAfterDeath(j, enemy);
           Postavke.francesca.kills++;
 
           if (Postavke.francesca.kills === 3) {
@@ -92,6 +88,12 @@ const francescaShooting = () => {
       }
     }
   }
+};
+
+const createCoinAfterDeath = (j, enemy) => {
+  Postavke.coins[j].visible = true;
+  Postavke.coins[j].x = enemy.x;
+  Postavke.coins[j].y = enemy.y - 50;
 };
 
 const collectCoins = (coins) => {

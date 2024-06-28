@@ -16,10 +16,7 @@ btnSetupGame.addEventListener("click", setup);
 function setup() {
   GAME.clearSprites();
 
-  Postavke.robots = [];
-  Postavke.missiles = [];
-  Postavke.enemies = [];
-  Postavke.coins = [];
+  initializeDefaultArrays();
 
   let chosen = GAME.activeWorldMap.name;
   GameSettings.output(chosen);
@@ -41,10 +38,8 @@ function setup() {
 
 const setupLevelOne = () => {
   GAME.activeWorldMap.setCollisions("Platform");
-  let francesca = new Francesca(GAME.getSpriteLayer("Witch"));
-  GAME.addSprite(francesca);
-  Postavke.francesca = francesca;
-  Postavke.francesca.x = 72;
+
+  const francesca = createFrancesca();
 
   createRobot(320, 20);
   createRobot(750, 30);
@@ -71,4 +66,19 @@ const createCoins = (amount) => {
     GAME.addSprite(newCoin);
     Postavke.coins.push(newCoin);
   }
+};
+
+const initializeDefaultArrays = () => {
+  Postavke.robots = [];
+  Postavke.missiles = [];
+  Postavke.enemies = [];
+  Postavke.coins = [];
+};
+
+const createFrancesca = () => {
+  const francesca = new Francesca(GAME.getSpriteLayer("Witch"));
+  GAME.addSprite(francesca);
+  Postavke.francesca = francesca;
+  Postavke.francesca.x = 72;
+  return francesca;
 };
