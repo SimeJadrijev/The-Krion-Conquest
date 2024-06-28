@@ -83,6 +83,11 @@ const francescaShooting = () => {
           Postavke.coins[j].visible = true;
           Postavke.coins[j].x = enemy.x;
           Postavke.coins[j].y = enemy.y - 50;
+          Postavke.francesca.kills++;
+
+          if (Postavke.francesca.kills === 3) {
+            alert("gotovo");
+          }
         }
       }
     }

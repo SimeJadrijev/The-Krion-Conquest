@@ -48,6 +48,7 @@ class Francesca extends Character {
     this.#lives = 1;
     this.boxTouch = false;
     this.activeMissiles = 0;
+    this.kills = 0;
 
     this.direction = 90;
   }
