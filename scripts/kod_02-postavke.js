@@ -52,6 +52,7 @@ const setupLevelOne = () => {
 };
 
 const setupLevelTwo = () => {
+  GAME.clearSprites();
   GAME.activeWorldMap.setCollisions("Platform");
   const francesca = createFrancesca();
   const finalBoss = createFinalBoss(1300, 150);
